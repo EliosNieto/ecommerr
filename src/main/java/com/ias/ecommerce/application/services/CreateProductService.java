@@ -3,7 +3,7 @@ package com.ias.ecommerce.application.services;
 import com.ias.ecommerce.application.commons.NonEmptyDecimal;
 import com.ias.ecommerce.application.commons.NonEmptyInteger;
 import com.ias.ecommerce.application.commons.NonEmptyString;
-import com.ias.ecommerce.application.commons.operation.FiltereEnum;
+import com.ias.ecommerce.application.commons.FilterEnum;
 import com.ias.ecommerce.application.domain.IdentificationProduct;
 import com.ias.ecommerce.application.domain.Product;
 import com.ias.ecommerce.application.domain.ProductStatus;
@@ -30,6 +30,7 @@ public class CreateProductService implements CreateProductUseCase {
 
     @Override
     public CreateProductResponse execute(CreateProductRequest request) {
+        LOGGER.debug(request.toString());
         Product product = validateInput(request);
 
         Optional<Product> productFind = productRepository.getFindById(product.getProductId());
@@ -60,15 +61,14 @@ public class CreateProductService implements CreateProductUseCase {
             taxRate = new NonEmptyDecimal(request.getTaxRate());
             inventoryQuantity = new NonEmptyInteger(request.getInventoryQuantity());
 
-            try {
-                productStatus = FiltereEnum.filter(ProductStatus.class, request.getProductStatus());
-            }catch (IllegalArgumentException e){
-                e.printStackTrace();
-            }
+            productStatus = FilterEnum.filter(ProductStatus.class, request.getProductStatus());
+
 
             return new Product(identificationProduct,name,description, basePrice, taxRate, productStatus, inventoryQuantity);
 
-        } catch(IllegalArgumentException e) {
+        } catch(RuntimeException e) {
+            LOGGER.info(e.getMessage());
+
             throw new InputDataError(e.getMessage());
         }
     }

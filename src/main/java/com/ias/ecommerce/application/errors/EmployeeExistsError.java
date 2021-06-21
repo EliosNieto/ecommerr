@@ -16,7 +16,7 @@ public class EmployeeExistsError extends ApplicationError {
 
     @Override
     public String errorCode() {
-        return "PRODUCT_ALREADY_EXISTS_ERROR";
+        return "EMPLOYEE_ALREADY_EXISTS_ERROR";
     }
 
     @Override
@@ -25,9 +25,14 @@ public class EmployeeExistsError extends ApplicationError {
     }
 
     @Override
+    public String getMessage() {
+        return "Employee already exists";
+    }
+
+    @Override
     public Map<String, Object> metadata() {
         return Map.of(
-                "idenfication",identificationNumber.getValue()
+                "identification",identificationNumber.getValue()
         );
     }
 }

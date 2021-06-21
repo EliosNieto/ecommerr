@@ -16,7 +16,7 @@ public class ProductApplicationConfiguration {
 
     @Bean
     public AllProductUseCase allProductUseCase(ProductRepository productRepository){
-        return new AllProductServices(productRepository);
+        return new ListProductServices(productRepository);
     }
 
     @Bean

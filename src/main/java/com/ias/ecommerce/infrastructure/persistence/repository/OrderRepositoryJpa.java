@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepositoryJpa extends CrudRepository<OrderEntity, Integer> {
+public interface OrderRepositoryJpa extends CrudRepository<OrderEntity, Long> {
 
 
 }

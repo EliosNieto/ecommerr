@@ -16,7 +16,7 @@ public class ProductExistsError extends ApplicationError {
 
     @Override
     public String getMessage() {
-        return "Code product already exists ";
+        return "Code product already exists";
     }
 
     @Override

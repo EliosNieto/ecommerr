@@ -2,6 +2,8 @@ package com.ias.ecommerce.application.services;
 
 import com.ias.ecommerce.application.domain.IdentificationProduct;
 import com.ias.ecommerce.application.domain.Product;
+import com.ias.ecommerce.application.errors.InputDataError;
+import com.ias.ecommerce.application.errors.ProductNotFound;
 import com.ias.ecommerce.application.model.product.FindByIdProductRequest;
 import com.ias.ecommerce.application.model.product.FindByIdProductResponse;
 import com.ias.ecommerce.application.ports.in.FindByIdProductUseCase;
@@ -22,10 +24,19 @@ public class FindByIdProductService implements FindByIdProductUseCase {
         IdentificationProduct identificationProduct = identificationProduct(request.getIdentificationProduct());
         Optional<Product> productOptional = this.productRepository.getFindById(identificationProduct);
 
+        if (!productOptional.isPresent()){
+            throw new ProductNotFound(identificationProduct);
+        }
+
         return new FindByIdProductResponse(productOptional.get());
     }
 
-    private IdentificationProduct identificationProduct(String value){
-        return new IdentificationProduct(value);
+    private IdentificationProduct identificationProduct(String value) {
+        try {
+            return new IdentificationProduct(value);
+
+        }catch (RuntimeException e){
+           throw  new InputDataError(e.getMessage());
+        }
     }
 }

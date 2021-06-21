@@ -11,7 +11,7 @@ public class EmployeeApplicationConfiguration {
 
     @Bean
     public AllEmployeeUseCase allEmployeeUseCase(EmployeeRepository employeeRepository){
-        return new AllEmployeeService(employeeRepository);
+        return new ListEmployeeService(employeeRepository);
     }
 
     @Bean

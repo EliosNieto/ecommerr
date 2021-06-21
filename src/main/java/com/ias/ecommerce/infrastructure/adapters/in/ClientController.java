@@ -1,6 +1,6 @@
 package com.ias.ecommerce.infrastructure.adapters.in;
 
-import com.ias.ecommerce.application.model.client.crud.*;
+import com.ias.ecommerce.application.model.client.*;
 import com.ias.ecommerce.application.ports.in.*;
 import com.ias.ecommerce.infrastructure.commons.UseCaseHttpExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity listClientsHandler(){
-        return useCaseHttpExecutor.executeUseCase(allClientUseCase, new AllClientRequest());
+        return useCaseHttpExecutor.executeUseCase(allClientUseCase, new ListClientRequest());
     }
 
     @PostMapping
@@ -48,8 +48,9 @@ public class ClientController {
         return useCaseHttpExecutor.executeUseCase(deleteClientUseCase, new DeleteClientRequest(id));
     }
 
-    @PutMapping
-    public ResponseEntity updateClientHandler(@RequestBody UpdateClientRequest updateClientRequest){
+    @PutMapping(path = "/{id}")
+    public ResponseEntity updateClientHandler(@PathVariable String id, @RequestBody UpdateClientRequest updateClientRequest){
+        updateClientRequest.setIdentificationNumber(id);
         return useCaseHttpExecutor.executeUseCase(updateClientUseCase,updateClientRequest);
     }
 }

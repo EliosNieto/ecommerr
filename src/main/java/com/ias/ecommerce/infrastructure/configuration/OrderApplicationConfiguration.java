@@ -38,6 +38,6 @@ public class OrderApplicationConfiguration {
 
     @Bean
     public AllOrderUseCase allOrderUseCase(OrderRepositoryImpl orderRepository){
-        return new AllOrderService(orderRepository);
+        return new ListOrderService(orderRepository);
     }
 }

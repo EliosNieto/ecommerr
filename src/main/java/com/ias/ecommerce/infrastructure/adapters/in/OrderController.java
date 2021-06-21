@@ -1,6 +1,6 @@
 package com.ias.ecommerce.infrastructure.adapters.in;
 
-import com.ias.ecommerce.application.model.orders.crud.*;
+import com.ias.ecommerce.application.model.orders.*;
 import com.ias.ecommerce.application.ports.in.*;
 import com.ias.ecommerce.infrastructure.commons.UseCaseHttpExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity listOrderHandler(){
-        return useCaseHttpExecutor.executeUseCase(allOrderUseCase, new AllOrderRequest());
+        return useCaseHttpExecutor.executeUseCase(allOrderUseCase, new ListOrderRequest());
     }
 
     @GetMapping(path = "/{id}")

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class UpdateProductRequest implements ApplicationRequest {
 
-    private final String idProduct;
+    private String productId;
     private final String name;
     private final String description;
     private final String basePrice;
@@ -14,8 +14,7 @@ public class UpdateProductRequest implements ApplicationRequest {
     private final String productStatus;
     private final String inventoryQuantity;
 
-    public UpdateProductRequest(String idProduct, String name, String description, String basePrice, String taxRate, String productStatus, String inventoryQuantity) {
-        this.idProduct = idProduct;
+    public UpdateProductRequest(String name, String description, String basePrice, String taxRate, String productStatus, String inventoryQuantity) {
         this.name = name;
         this.description = description;
         this.basePrice = basePrice;
@@ -24,8 +23,12 @@ public class UpdateProductRequest implements ApplicationRequest {
         this.inventoryQuantity = inventoryQuantity;
     }
 
-    public String getIdProduct() {
-        return idProduct;
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -55,7 +58,6 @@ public class UpdateProductRequest implements ApplicationRequest {
     @Override
     public String toString() {
         return "UpdateProductRequest{" +
-                "idProduct='" + idProduct + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", basePrice='" + basePrice + '\'' +

@@ -1,21 +1,23 @@
 package com.ias.ecommerce.application.domain;
 
+import com.ias.ecommerce.application.commons.NonEmptyDecimal;
+
 import java.util.List;
 import java.util.UUID;
 
 public class Order {
 
     private IdentificationOrder id;
-    private IdentificationNumber clientId;
+    private Client client;
     private final OrderStatus status;
-    private Double total;
-    private Float discount;
-    private Double totalOrder;
+    private NonEmptyDecimal total;
+    private NonEmptyDecimal discount;
+    private NonEmptyDecimal totalOrder;
     private List<OrderDetails> details;
 
-    public Order(IdentificationOrder id, IdentificationNumber clientId, OrderStatus status, Double total, Float discount, Double totalOrder, List<OrderDetails> details) {
+    public Order(IdentificationOrder id, Client client, OrderStatus status, NonEmptyDecimal total, NonEmptyDecimal discount, NonEmptyDecimal totalOrder, List<OrderDetails> details) {
         this.id = id;
-        this.clientId = clientId;
+        this.client = client;
         this.status = status;
         this.total = total;
         this.discount = discount;
@@ -31,39 +33,39 @@ public class Order {
         this.id = id;
     }
 
-    public IdentificationNumber getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(IdentificationNumber clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public OrderStatus getStatus() {
         return status;
     }
 
-    public Double getTotal() {
+    public NonEmptyDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(NonEmptyDecimal total) {
         this.total = total;
     }
 
-    public Float getDiscount() {
+    public NonEmptyDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Float discount) {
+    public void setDiscount(NonEmptyDecimal discount) {
         this.discount = discount;
     }
 
-    public Double getTotalOrder() {
+    public NonEmptyDecimal getTotalOrder() {
         return totalOrder;
     }
 
-    public void setTotalOrder(Double totalOrder) {
+    public void setTotalOrder(NonEmptyDecimal totalOrder) {
         this.totalOrder = totalOrder;
     }
 
@@ -79,7 +81,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", clientId=" + clientId +
+                ", client=" + client +
                 ", status=" + status +
                 ", total=" + total +
                 ", discount=" + discount +

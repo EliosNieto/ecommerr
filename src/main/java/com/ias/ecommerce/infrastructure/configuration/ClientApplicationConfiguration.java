@@ -16,7 +16,7 @@ public class ClientApplicationConfiguration {
 
     @Bean
     public AllClientUseCase allClientUseCase(ClientRepositoryImpl clientRepository){
-        return new AllClientService(clientRepository);
+        return new ListClientService(clientRepository);
     }
 
     @Bean

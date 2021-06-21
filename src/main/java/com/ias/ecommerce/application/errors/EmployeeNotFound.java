@@ -25,6 +25,11 @@ public class EmployeeNotFound extends ApplicationError {
     }
 
     @Override
+    public String getMessage() {
+        return "Employee not found ";
+    }
+
+    @Override
     public Map<String, Object> metadata() {
         return Map.of(
                 "identification",identificationNumber.getValue()

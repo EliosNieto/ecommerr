@@ -11,7 +11,7 @@ public class ProductEntity {
 
     @Id
     @Column(name = "product_id", nullable = false)
-    private Integer productId;
+    private Long productId;
 
     @Column(length = 100, nullable = false)
     private String name;
@@ -33,11 +33,11 @@ public class ProductEntity {
 
     private LocalDate date;
 
-    public Integer getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 

@@ -2,8 +2,10 @@ package com.ias.ecommerce.application.services;
 
 import com.ias.ecommerce.application.domain.Client;
 import com.ias.ecommerce.application.domain.IdentificationNumber;
-import com.ias.ecommerce.application.model.client.crud.FindByClientResponse;
-import com.ias.ecommerce.application.model.client.crud.FindByIdClientRequest;
+import com.ias.ecommerce.application.errors.ClientNotFound;
+import com.ias.ecommerce.application.errors.InputDataError;
+import com.ias.ecommerce.application.model.client.FindByClientResponse;
+import com.ias.ecommerce.application.model.client.FindByIdClientRequest;
 import com.ias.ecommerce.application.ports.in.FindByIdClientUseCase;
 import com.ias.ecommerce.application.ports.out.ClientRepository;
 
@@ -19,10 +21,21 @@ public class FindByIdClientService implements FindByIdClientUseCase {
 
     @Override
     public FindByClientResponse execute(FindByIdClientRequest request) {
-        IdentificationNumber identificationNumber = new IdentificationNumber(request.getValue());
+        IdentificationNumber identificationNumber = validateRequest(request);
 
         Optional<Client> optionalClient = clientRepository.findById(identificationNumber);
+        if (!optionalClient.isPresent()){
+            throw new ClientNotFound(identificationNumber);
+        }
 
         return new FindByClientResponse(optionalClient.get());
+    }
+
+    private IdentificationNumber validateRequest(FindByIdClientRequest request){
+        try {
+            return new IdentificationNumber(request.getValue());
+        }catch (RuntimeException e){
+            throw new InputDataError(e.getMessage());
+        }
     }
 }

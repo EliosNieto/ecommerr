@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class NonEmptyIntegerMapper {
 
     public NonEmptyInteger map ( Integer value ){
-        String valueMap = Integer.toString(value);
+        String valueMap = Long.toString(value);
         return new NonEmptyInteger(valueMap);
     }
 

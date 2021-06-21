@@ -8,32 +8,32 @@ import java.io.Serializable;
 public class OrderProductPK implements Serializable {
 
     @Column(name = "order_id")
-    private Integer orderId;
+    private Long orderId;
 
     @Column(name = "product_id")
-    private Integer productId;
+    private Long productId;
 
     public OrderProductPK() {
     }
 
-    public OrderProductPK(Integer orderId, Integer productId) {
+    public OrderProductPK(Long orderId, Long productId) {
         this.orderId = orderId;
         this.productId = productId;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public Integer getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 

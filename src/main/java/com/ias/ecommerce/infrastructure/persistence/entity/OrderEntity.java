@@ -13,7 +13,7 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id", nullable = false)
-    private Integer orderId;
+    private Long orderId;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
@@ -34,11 +34,11 @@ public class OrderEntity {
     @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
     private List<OrderDetailsEntity> detailsEntities;
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -89,6 +89,7 @@ public class OrderEntity {
     public void setDetailsEntities(List<OrderDetailsEntity> detailsEntities) {
         this.detailsEntities = detailsEntities;
     }
+
 
     @Override
     public String toString() {

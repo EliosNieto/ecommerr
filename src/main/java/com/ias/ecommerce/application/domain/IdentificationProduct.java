@@ -9,20 +9,20 @@ import java.util.regex.Pattern;
 import static com.ias.ecommerce.application.commons.StringUtils.nonBlank;
 
 public class IdentificationProduct {
-    private final int value;
+    private final Long value;
 
     private final Pattern pattern = Pattern.compile("-?\\d+");
     private final int VALUE_MIN = 1;
 
     public IdentificationProduct(String value) {
-        Validate.notNull(value, "IdentificationProduct can not be null");
-        Validate.isTrue(nonBlank(value), "IdentificationProduct can not be empty");
-        Validate.isTrue(pattern.matcher(value).matches(), "Invalid IdentificationProduct number: "+value);
-        Validate.isTrue(NumberUtils.numberGreaterThan(Integer.parseInt(value), VALUE_MIN),"IdentificationProduct must be greater to "+VALUE_MIN);
-        this.value = NumberUtils.toInteger(value);
+        Validate.notNull(value, "Identification product can not be null");
+        Validate.isTrue(nonBlank(value), "Identification product can not be empty");
+        Validate.isTrue(pattern.matcher(value).matches(), "Invalid Identification product number: "+value);
+        Validate.isTrue(NumberUtils.numberGreaterThan(Integer.parseInt(value), VALUE_MIN),"Identification product must be greater to "+VALUE_MIN);
+        this.value = NumberUtils.toLong(value);
     }
 
-    public int getValue() {
+    public Long getValue() {
         return value;
     }
 

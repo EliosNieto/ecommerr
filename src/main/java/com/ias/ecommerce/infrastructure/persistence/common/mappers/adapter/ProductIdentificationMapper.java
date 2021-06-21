@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductIdentificationMapper {
 
-    public IdentificationProduct map(Integer value){
+    public IdentificationProduct map(Long value){
         String valueIdentification = String.valueOf(value);
 
         return new IdentificationProduct(valueIdentification);
     }
 
-    public Integer map(IdentificationProduct identificationProduct){
+    public Long map(IdentificationProduct identificationProduct){
         return identificationProduct.getValue();
     }
 

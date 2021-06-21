@@ -10,4 +10,8 @@ public class StringUtils {
     public static boolean isValueNull(String value){
         return value == null;
     }
+
+    public static String doubleToString(Double aDouble){
+        return String.valueOf(aDouble);
+    }
 }

@@ -21,7 +21,7 @@ public class OrderNotFound extends ApplicationError {
 
     @Override
     public String getMessage() {
-        return "order id not found: "+identificationOrder.getValue();
+        return "order not found";
     }
 
     @Override

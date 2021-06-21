@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class IdentificationNumberMapper {
 
-    public IdentificationNumber map(Integer value){
+    public IdentificationNumber map(Long value){
         String valueMapper = String.valueOf(value);
         return new IdentificationNumber(valueMapper);
     }
 
-    public Integer map (IdentificationNumber identificationNumber){
+    public Long map (IdentificationNumber identificationNumber){
         return identificationNumber.getValue();
     }
 }

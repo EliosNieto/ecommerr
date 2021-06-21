@@ -5,16 +5,13 @@ import com.ias.ecommerce.application.domain.*;
 import com.ias.ecommerce.application.errors.ClientNotFound;
 import com.ias.ecommerce.application.errors.OrderNotFound;
 import com.ias.ecommerce.application.errors.ProductNotFound;
-import com.ias.ecommerce.application.model.orders.OrderRequest;
-import com.ias.ecommerce.application.model.orders.crud.UpdateOrderRequest;
-import com.ias.ecommerce.application.model.orders.crud.UpdateOrderResponse;
+import com.ias.ecommerce.application.model.orders.UpdateOrderRequest;
+import com.ias.ecommerce.application.model.orders.UpdateOrderResponse;
 import com.ias.ecommerce.application.ports.in.UpdateOrderUseCase;
 import com.ias.ecommerce.application.ports.out.ClientRepository;
 import com.ias.ecommerce.application.ports.out.OrderRepository;
 import com.ias.ecommerce.application.ports.out.ProductRepository;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class UpdateOrderService implements UpdateOrderUseCase {
@@ -32,29 +29,21 @@ public class UpdateOrderService implements UpdateOrderUseCase {
     @Override
     public UpdateOrderResponse execute(UpdateOrderRequest request) {
 
-        IdentificationOrder identificationOrder = new IdentificationOrder(request.getId());
+        IdentificationOrder identificationOrder = new IdentificationOrder(request.getIdOrder());
         Optional<Order> optionalOrder = orderRepository.findById(identificationOrder);
 
         if(!optionalOrder.isPresent()){
             throw new OrderNotFound(identificationOrder);
         }
 
-        IdentificationNumber identificationNumber = new IdentificationNumber(request.getClientId());
-
-        Optional<Client> optionalClient = clientRepository.findById(identificationNumber);
-        if (!optionalClient.isPresent()){
-            throw new ClientNotFound(identificationNumber);
-        }
-
-        optionalOrder.get().setClientId(identificationNumber);
-        toOrderDetails(request, optionalOrder.get());
+        //toOrderDetails(request, optionalOrder.get());
 
         Optional<Order> order = orderRepository.update(optionalOrder.get());
 
         return new UpdateOrderResponse(order.get());
     }
 
-
+/*
     private void toOrderDetails(UpdateOrderRequest request, Order order){
         IdentificationProduct identificationProduct;
         double total = 0;
@@ -74,7 +63,7 @@ public class UpdateOrderService implements UpdateOrderUseCase {
             order.getDetails().add(new OrderDetails(identificationProduct,order.getId(),value, amount ,totalLine));
         }
         order.setTotal(total);
-    }
+    }*/
 
 
 }

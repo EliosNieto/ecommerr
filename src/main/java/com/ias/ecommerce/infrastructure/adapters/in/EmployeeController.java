@@ -1,6 +1,6 @@
 package com.ias.ecommerce.infrastructure.adapters.in;
 
-import com.ias.ecommerce.application.model.employee.crud.*;
+import com.ias.ecommerce.application.model.employee.*;
 import com.ias.ecommerce.application.ports.in.*;
 import com.ias.ecommerce.infrastructure.commons.UseCaseHttpExecutor;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +33,7 @@ public class EmployeeController {
 
     @GetMapping
     public ResponseEntity getAllEmployeeHandler(){
-        return useCaseHttpExecutor.executeUseCase(allEmployeeUseCase, new AllEmployeeRequest());
+        return useCaseHttpExecutor.executeUseCase(allEmployeeUseCase, new ListEmployeeRequest());
     }
 
     @GetMapping(path = "/{id}")
@@ -46,8 +46,9 @@ public class EmployeeController {
         return useCaseHttpExecutor.executeUseCase(deleteEmployeeUseCase, new DeleteEmployeeRequest(id));
     }
 
-    @PutMapping
-    public ResponseEntity updateEmployeeHandler(@RequestBody UpdateEmployeeRequest request){
+    @PutMapping(path = "/{id}")
+    public ResponseEntity updateEmployeeHandler(@PathVariable String id, @RequestBody UpdateEmployeeRequest request){
+        request.setId(id);
         return useCaseHttpExecutor.executeUseCase(updateEmployeeUseCase, request);
     }
 }

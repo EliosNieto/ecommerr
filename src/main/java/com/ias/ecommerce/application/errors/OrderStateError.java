@@ -3,12 +3,16 @@ package com.ias.ecommerce.application.errors;
 import com.ias.ecommerce.application.commons.errors.ApplicationError;
 import com.ias.ecommerce.application.commons.errors.HttpStatusCode;
 
+import java.util.Map;
+
 public class OrderStateError extends ApplicationError {
 
     private final String message;
+    private final String estate;
 
-    public OrderStateError(String message) {
+    public OrderStateError(String message, String estate) {
         this.message = message;
+        this.estate = estate;
     }
 
     @Override
@@ -24,5 +28,10 @@ public class OrderStateError extends ApplicationError {
     @Override
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public Map<String, Object> metadata() {
+        return Map.of("Estate", estate);
     }
 }

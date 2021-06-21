@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class IdentificationNumber {
-    private final Integer value;
+    private final Long value;
 
     private final Pattern pattern = Pattern.compile("^\\d{8,20}$");
 
@@ -16,10 +16,10 @@ public class IdentificationNumber {
         Validate.notNull(value, "IdentificationNumber can not be null");
         Validate.isTrue(StringUtils.nonBlank(value), "IdentificationNumber can not be empty");
         Validate.isTrue(pattern.matcher(value).matches(), "Invalid identification number: " + value);
-        this.value = NumberUtils.toInteger(value);
+        this.value = NumberUtils.toLong(value);
     }
 
-    public Integer getValue() {
+    public Long getValue() {
         return value;
     }
 

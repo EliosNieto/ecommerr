@@ -1,12 +1,14 @@
 package com.ias.ecommerce.application.services;
 
+import com.ias.ecommerce.application.commons.NonEmptyString;
 import com.ias.ecommerce.application.domain.Client;
+import com.ias.ecommerce.application.domain.IdentificationNumber;
 import com.ias.ecommerce.application.errors.ClientExistError;
-import com.ias.ecommerce.application.model.client.crud.CreateClientRequest;
-import com.ias.ecommerce.application.model.client.crud.CreateClientResponse;
+import com.ias.ecommerce.application.errors.InputDataError;
+import com.ias.ecommerce.application.model.client.CreateClientRequest;
+import com.ias.ecommerce.application.model.client.CreateClientResponse;
 import com.ias.ecommerce.application.ports.in.CreateClientUseCase;
 import com.ias.ecommerce.application.ports.out.ClientRepository;
-import com.ias.ecommerce.application.services.commons.ClientUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +27,7 @@ public class CreateClientService implements CreateClientUseCase {
     @Override
     public CreateClientResponse execute(CreateClientRequest request) {
         logger.info(request.toString());
-        Client client = ClientUtils.validateRequest(request);
+        Client client = validRequest(request);
 
         Optional<Client> optionalClient = clientRepository.findById(client.getIdentificationNumber());
         if(optionalClient.isPresent()){
@@ -37,5 +39,18 @@ public class CreateClientService implements CreateClientUseCase {
         return new CreateClientResponse(client);
     }
 
+    private Client validRequest(CreateClientRequest request){
+        IdentificationNumber identificationNumber;
+        NonEmptyString names;
+        NonEmptyString lastNames;
+        try {
+            identificationNumber = new IdentificationNumber(request.getIdentification());
+            names = new NonEmptyString(request.getNames());
+            lastNames = new NonEmptyString(request.getLastNames());
+            return new Client(identificationNumber, names, lastNames);
+        }catch (RuntimeException e){
+            throw new InputDataError(e.getMessage());
+        }
+    }
 
 }

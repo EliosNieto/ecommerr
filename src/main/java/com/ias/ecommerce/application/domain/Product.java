@@ -6,7 +6,7 @@ import static com.ias.ecommerce.application.commons.NumberUtils.numberGreaterTha
 
 public class Product {
 
-    private final IdentificationProduct productId;
+    private IdentificationProduct productId;
     private final NonEmptyString name;
     private final NonEmptyString description;
     private final NonEmptyDecimal basePrice;
@@ -45,6 +45,10 @@ public class Product {
         this.inventoryQuantity = inventoryQuantity;
     }
 
+    public void setProductId(IdentificationProduct productId) {
+        this.productId = productId;
+    }
+
     public IdentificationProduct getProductId() {
         return productId;
     }
@@ -71,5 +75,18 @@ public class Product {
 
     public NonEmptyInteger getInventoryQuantity() {
         return inventoryQuantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", name=" + name +
+                ", description=" + description +
+                ", basePrice=" + basePrice +
+                ", taxRate=" + taxRate +
+                ", productStatus=" + productStatus +
+                ", inventoryQuantity=" + inventoryQuantity +
+                '}';
     }
 }

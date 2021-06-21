@@ -6,17 +6,13 @@ import java.util.Objects;
 
 public class CreateProductRequest implements ApplicationRequest {
 
-    private String idProduct;
-    private String name;
-    private String description;
-    private String basePrice;
-    private String taxRate;
-    private String productStatus;
-    private String inventoryQuantity;
-
-    public CreateProductRequest(){
-
-    }
+    private final String idProduct;
+    private final String name;
+    private final String description;
+    private final String basePrice;
+    private final String taxRate;
+    private final String productStatus;
+    private final String inventoryQuantity;
 
     public CreateProductRequest(String idProduct, String name, String description, String basePrice, String taxRate, String productStatus, String inventoryQuantity) {
         this.idProduct = idProduct;
@@ -32,56 +28,28 @@ public class CreateProductRequest implements ApplicationRequest {
         return idProduct;
     }
 
-    public void setIdProduct(String idProduct) {
-        this.idProduct = idProduct;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getBasePrice() {
         return basePrice;
-    }
-
-    public void setBasePrice(String basePrice) {
-        this.basePrice = basePrice;
     }
 
     public String getTaxRate() {
         return taxRate;
     }
 
-    public void setTaxRate(String taxRate) {
-        this.taxRate = taxRate;
-    }
-
     public String getProductStatus() {
         return productStatus;
     }
 
-    public void setProductStatus(String productStatus) {
-        this.productStatus = productStatus;
-    }
-
     public String getInventoryQuantity() {
         return inventoryQuantity;
-    }
-
-    public void setInventoryQuantity(String inventoryQuantity) {
-        this.inventoryQuantity = inventoryQuantity;
     }
 
     @Override

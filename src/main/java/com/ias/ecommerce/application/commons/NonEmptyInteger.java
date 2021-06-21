@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class NonEmptyInteger {
 
-    private  int value;
+    private Integer value;
 
     private final Pattern pattern = Pattern.compile("^[+-]?[0-9]{1,9}(?:.[0-9]{1,2})?$");
 
@@ -17,7 +17,7 @@ public class NonEmptyInteger {
     }
 
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 

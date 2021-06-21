@@ -3,6 +3,8 @@ package com.ias.ecommerce.application.errors;
 import com.ias.ecommerce.application.commons.errors.ApplicationError;
 import com.ias.ecommerce.application.commons.errors.HttpStatusCode;
 
+import java.util.Map;
+
 public class InputDataError extends ApplicationError {
 
     private final String message;
@@ -25,4 +27,6 @@ public class InputDataError extends ApplicationError {
     public HttpStatusCode httpStatusCode() {
         return HttpStatusCode.BAD_REQUEST;
     }
+
+
 }

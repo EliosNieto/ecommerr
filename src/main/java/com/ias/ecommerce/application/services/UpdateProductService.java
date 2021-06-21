@@ -3,12 +3,12 @@ package com.ias.ecommerce.application.services;
 import com.ias.ecommerce.application.commons.NonEmptyDecimal;
 import com.ias.ecommerce.application.commons.NonEmptyInteger;
 import com.ias.ecommerce.application.commons.NonEmptyString;
-import com.ias.ecommerce.application.commons.operation.FiltereEnum;
+import com.ias.ecommerce.application.commons.FilterEnum;
 import com.ias.ecommerce.application.domain.IdentificationProduct;
 import com.ias.ecommerce.application.domain.Product;
 import com.ias.ecommerce.application.domain.ProductStatus;
 import com.ias.ecommerce.application.errors.InputDataError;
-import com.ias.ecommerce.application.errors.ProductExistsError;
+import com.ias.ecommerce.application.errors.ProductNotFound;
 import com.ias.ecommerce.application.model.product.UpdateProductRequest;
 import com.ias.ecommerce.application.model.product.UpdateProductResponse;
 import com.ias.ecommerce.application.ports.in.UpdateProductUseCase;
@@ -35,7 +35,7 @@ public class UpdateProductService implements UpdateProductUseCase {
 
         Optional<Product> productOptional = productRepository.getFindById(product.getProductId());
         if (!productOptional.isPresent()) {
-            throw new ProductExistsError(product.getProductId());
+            throw new ProductNotFound(product.getProductId());
         }
 
         productRepository.update(product);
@@ -45,7 +45,7 @@ public class UpdateProductService implements UpdateProductUseCase {
 
     private Product validateProduct(UpdateProductRequest request) {
         try {
-            IdentificationProduct identificationProduct = new IdentificationProduct(request.getIdProduct());
+            IdentificationProduct identificationProduct = new IdentificationProduct(request.getProductId());
             NonEmptyString name = new NonEmptyString(request.getName());
             NonEmptyString description = new NonEmptyString(request.getDescription());
             NonEmptyDecimal basePrice = new NonEmptyDecimal(request.getBasePrice());
@@ -54,7 +54,7 @@ public class UpdateProductService implements UpdateProductUseCase {
             NonEmptyInteger inventoryQuantity = new NonEmptyInteger(request.getInventoryQuantity());
 
             try {
-                productStatus = FiltereEnum.filter(ProductStatus.class, request.getProductStatus());
+                productStatus = FilterEnum.filter(ProductStatus.class, request.getProductStatus());
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
             }

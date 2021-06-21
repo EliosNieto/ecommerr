@@ -45,7 +45,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity listProductHandler(){
-        return useCaseHttpExecutor.executeUseCase(allProductService, new AllProductRequest());
+        return useCaseHttpExecutor.executeUseCase(allProductService, new ListProductRequest());
     }
 
     @GetMapping(path = "/{id}")
@@ -61,9 +61,9 @@ public class ProductController {
         return useCaseHttpExecutor.executeUseCase(deleteProductUseCase,   new DeleteProductRequest(id));
     }
 
-    @PutMapping
-    private ResponseEntity updateProductHandler(@RequestBody UpdateProductRequest request){
-
+    @PutMapping("/{id}")
+    private ResponseEntity updateProductHandler(@PathVariable String id, @RequestBody UpdateProductRequest request){
+        request.setProductId(id);
         return useCaseHttpExecutor.executeUseCase(updateProductUseCase,request);
 
     }

@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class IdentificationOrderMapper {
 
-    public IdentificationOrder map(Integer value){
+    public IdentificationOrder map(Long value){
         String valueMapper = String.valueOf(value);
         return new IdentificationOrder(valueMapper);
     }
 
-    public Integer map(IdentificationOrder identificationOrder){
+    public Long map(IdentificationOrder identificationOrder){
         return identificationOrder.getValue();
     }
 }

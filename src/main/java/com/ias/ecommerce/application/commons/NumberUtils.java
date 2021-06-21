@@ -33,8 +33,8 @@ public class NumberUtils {
         return Double.parseDouble(value);
     }
 
-    public static Integer toInteger(String value){
-        return Integer.parseInt(value);
+    public static Long toLong(String value){
+        return Long.parseLong(value);
     }
 
     public static int toInt(String value){

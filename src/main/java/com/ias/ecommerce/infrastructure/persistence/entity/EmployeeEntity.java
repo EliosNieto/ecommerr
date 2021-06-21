@@ -9,7 +9,7 @@ public class EmployeeEntity {
 
     @Id
     @Column(name = "employee_id")
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String names;
@@ -17,11 +17,11 @@ public class EmployeeEntity {
     @Column(name = "last_names", nullable = false, length = 100)
     private String lastNames;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
